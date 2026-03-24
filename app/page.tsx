@@ -1,5 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
+import Orbit from "./_components/Orbit/orbit";
+import HTML5 from "../public/html5.svg";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -11,7 +13,7 @@ const PageWrapper = styled.div`
   // background: linear-gradient(45deg, #4466ff, #ee88cc);
   background: linear-gradient(45deg, #000055, #119988, #000055, #119988, #000055);
   background-size: 200vw 200vw;
-  animation: run 10s linear infinite;
+  animation: run 20s linear infinite;
 
   @keyframes run {
     0%{ background-position: 0% 0% }
@@ -30,6 +32,19 @@ export default function Home() {
   return (
     <PageWrapper>
       <H1>Matt Hildebrand</H1>
+      <Orbit
+        size={300}
+        location="topRight"
+      />
+      <Orbit
+        size={500}
+        location="topRight"
+      />
+      <Orbit
+        size={650}
+        location="topRight"
+        planet={HTML5}
+      />
     </PageWrapper>
   );
 }
