@@ -43,7 +43,7 @@ export default function Home() {
       <Orbit
         size={650}
         location="topRight"
-        planet="/html5.svg"
+        // planet="/html5.svg"
       />
     </PageWrapper>
   );
