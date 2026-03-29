@@ -165,10 +165,10 @@ export default function Orbit({ size, location, planet }: OrbitProps) {
       {planet ? (
         <div>
           <PlanetWrapper>
-            <Image src={planet} alt="SVG" />
+            <Image src={planet} alt="planet" width={60} height={60} />
           </PlanetWrapper>
           <PlanetWrapper>
-            <Image src={planet} alt="SVG" />
+            <Image src={planet} alt="planet" width={60} height={60} />
           </PlanetWrapper>
         </div>
       ) : ''}

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import Orbit from "./_components/Orbit/orbit";
-import HTML5 from "../public/html5.svg";
+// import HTML5 from "@/assets/html5.svg";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -43,7 +43,7 @@ export default function Home() {
       <Orbit
         size={650}
         location="topRight"
-        planet={HTML5}
+        planet="/html5.svg"
       />
     </PageWrapper>
   );
