@@ -23,15 +23,27 @@ const PageWrapper = styled.div`
 `;
 
 const H1 = styled.h1`
-  margin: auto;
-  font-size: 100px;
+  margin: auto auto auto 0;
+  font-size: clamp(24px, 15vw, 100px);
   z-index: 100;
+  text-align: left;
+`;
+
+const ContentWrapper = styled.div`
+  padding: clamp(1rem, calc(5vw - 6px), 2rem);
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justifcation: flex-start;
 `;
 
 export default function Home() {
   return (
     <PageWrapper>
-      <H1>Matt Hildebrand</H1>
+      <ContentWrapper>
+        <H1>Matt<br/>Hildebrand</H1>
+      </ContentWrapper>
       <Orbit
         size={300}
         location="topRight"
