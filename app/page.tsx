@@ -1,9 +1,7 @@
 'use client'
 
-import Image from "next/image";
 import styled from "styled-components";
 import Orbit from "./_components/orbit";
-// import HTML5 from "@/assets/html5.svg";
 import { SvgPlanet1, SvgPlanet2, SvgPlanet3 } from "./_components/Planets";
 
 const PageWrapper = styled.div`
