@@ -1,8 +1,7 @@
-import Image from "next/image";
-import { useId, useMemo } from "react";
-import styled from "styled-components"
+'use client'
 
-const SPIN_ROTATION = '10s';
+import { useId, useState } from "react";
+import styled from "styled-components"
 
 interface RingWrapperProps {
   width: number
@@ -150,10 +149,10 @@ interface OrbitProps {
 }
 
 export default function Orbit({ size, planet }: OrbitProps) {
-  const { duration, startAngle } = useMemo(() => ({
+  const [{ duration, startAngle }] = useState(() => ({
     duration: 8 + Math.random() * 8,                // 8-16s
     startAngle: Math.floor(Math.random() * 90),    // 0-359deg
-  }), []);
+  }));
 
   const id = useId();
 
