@@ -2,6 +2,9 @@ import Image from "next/image";
 import styled from "styled-components";
 import Orbit from "./_components/Orbit/orbit";
 // import HTML5 from "@/assets/html5.svg";
+import Planet1 from "@/assets/planet1.svg";
+import Planet2 from "@/assets/planet2.svg";
+import Planet3 from "@/assets/planet3.svg";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -11,7 +14,7 @@ const PageWrapper = styled.div`
   overflow: hidden;
 
   // background: linear-gradient(45deg, #4466ff, #ee88cc);
-  background: linear-gradient(45deg, #000055, #119988, #000055, #119988, #000055);
+  background: linear-gradient(45deg, #000070, #00aacc, #000070, #00aacc, #000070);
   background-size: 200vw 200vw;
   animation: run 20s linear infinite;
 
@@ -47,15 +50,17 @@ export default function Home() {
       <Orbit
         size={300}
         location="topRight"
+        planet={Planet3}
       />
       <Orbit
         size={500}
         location="topRight"
+        planet={Planet2}
       />
       <Orbit
         size={650}
         location="topRight"
-        planet="/html5.svg"
+        planet={Planet1}
       />
     </PageWrapper>
   );

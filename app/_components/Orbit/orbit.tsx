@@ -1,31 +1,34 @@
 import Image from "next/image";
-import { useId } from "react";
+import { useId, useMemo } from "react";
 import styled from "styled-components"
 
 const SPIN_ROTATION = '10s';
 
-interface Props {
+interface RingWrapperProps {
   $bottom: boolean
   $left: boolean
   width: number
   height: number
+  $duration: number
+  $startAngle: number
+  $id: string
 }
 
-const RingWrapper = styled.div<Props>`
+const RingWrapper = styled.div<RingWrapperProps>`
   width: ${(props) => props.width ? props.width : '500'}px;
   height: ${(props) => props.height ? props.height : '500'}px;
   position: absolute;
   ${(props) => props.$bottom ? 'bottom: 0' : 'top: 0'};
   ${(props) => props.$left ? 'left: 0' : 'right: 0'};
 
-  @keyframes spin {
+  @keyframes ring-spin-${(props) => props.$id} {
     from  { 
       transform:
         translate(
           ${(props) => props.$left ? '-50%' : '50%'}, 
           ${(props) => props.$bottom ? '50%' : '-50%'}
         )
-        rotate(0deg);
+        rotate(${(props) => props.$startAngle}deg);
     }
     to    {
       transform:
@@ -33,21 +36,25 @@ const RingWrapper = styled.div<Props>`
           ${(props) => props.$left ? '-50%' : '50%'}, 
           ${(props) => props.$bottom ? '50%' : '-50%'}
         )
-        rotate(360deg);
+        rotate(${(props) => props.$startAngle + 360}deg);
     }
   }
 
-  animation: spin ${SPIN_ROTATION} linear infinite;
+  animation: ring-spin-${(props) => props.$id} ${(props) => props.$duration}s linear infinite;
+
 `;
 
 interface RingProps {
   size: number
   bottom: boolean
   left: boolean
+  duration: number
+  startAngle: number
+  id: string
   children: React.ReactNode
 }
 
-const Ring = ({ size, bottom, left, children }: RingProps) => {
+const Ring = ({ size, bottom, left, duration, startAngle, id, children }: RingProps) => {
   const r = size / 2;
   const cx = r;
   const cy = r;
@@ -56,8 +63,6 @@ const Ring = ({ size, bottom, left, children }: RingProps) => {
   const clipHoleRadius = holeRadius + strokeWidth;
   const holeBottom = cy + r;
   const holeTop = cy - r;
-
-  const id = useId();
 
   const clipPath = [
     `M 0 0 H ${size} V ${size} H 0 Z`,
@@ -75,8 +80,10 @@ const Ring = ({ size, bottom, left, children }: RingProps) => {
     `a ${clipHoleRadius} ${clipHoleRadius} 0 1 0 ${-clipHoleRadius * 2} 0`,
   ].join(' ');
 
+  const safeId = id.replace(/:/g, '');
+
   return (
-    <RingWrapper width={size} height={size} $bottom={bottom} $left={left}>
+    <RingWrapper width={size} height={size} $bottom={bottom} $left={left} $duration={duration} $startAngle={startAngle} $id={safeId}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {children ? (
           <defs>
@@ -100,7 +107,13 @@ const Ring = ({ size, bottom, left, children }: RingProps) => {
   );
 };
 
-const PlanetWrapper = styled.div`
+interface PlanetProps {
+  $duration: number
+  $startAngle: number
+  $id: string
+}
+
+const PlanetWrapper = styled.div<PlanetProps>`
   position: absolute;
   left: 50%;
   width: 100px;
@@ -111,31 +124,38 @@ const PlanetWrapper = styled.div`
   &:first-child {
     bottom: 0;
 
-    @keyframes first-counter-spin {
-      from  {transform: translate(-50%, 50%) rotate(0deg);}
-      to    {transform: translate(-50%, 50%) rotate(-360deg);}
+    @keyframes first-counter-spin-${(props) => props.$id} {
+      from  {transform: translate(-50%, 50%) rotate(-${(props) => props.$startAngle}deg);}
+      to    {transform: translate(-50%, 50%) rotate(-${(props) => props.$startAngle + 360}deg);}
     } 
 
-    animation: first-counter-spin ${SPIN_ROTATION} linear infinite;
+    animation: first-counter-spin-${(props) => props.$id} ${(props) => props.$duration}s linear infinite;
   }
 
   &:last-child {
     top: 0;
 
-    @keyframes last-counter-spin {
-      from  {transform: translate(-50%, -50%) rotate(0deg);}
-      to    {transform: translate(-50%, -50%) rotate(-360deg);}
+    @keyframes last-counter-spin-${(props) => props.$id} {
+      from  {transform: translate(-50%, -50%) rotate(-${(props) => props.$startAngle}deg);}
+      to    {transform: translate(-50%, -50%) rotate(-${(props) => props.$startAngle + 360}deg);}
     } 
 
-    animation: last-counter-spin ${SPIN_ROTATION} linear infinite;
+    animation: last-counter-spin-${(props) => props.$id} ${(props) => props.$duration}s linear infinite;
   }
 
-  >img {
+  >svg {
     max-height: 100%;
     max-width: 100%;
+    fill: white;
+    stroke: white;
+
+    path, circle, rect {
+      fill: white;
+      stroke: white;
+    }
   }
 
-  animation: counter-spin ${SPIN_ROTATION} linear infinite;
+  animation: counter-spin ${(props) => props.$duration}s linear infinite;
 `;
 
 type LocationVariant = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
@@ -143,7 +163,7 @@ type LocationVariant = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 interface OrbitProps {
   size: number
   location?: LocationVariant
-  planet?: string
+  planet?: React.ElementType
 }
 
 export default function Orbit({ size, location, planet }: OrbitProps) {
@@ -156,19 +176,33 @@ export default function Orbit({ size, location, planet }: OrbitProps) {
     atLeft = true;
   }
 
+  const { duration, startAngle } = useMemo(() => ({
+    duration: 8 + Math.random() * 8,                // 8-16s
+    startAngle: Math.floor(Math.random() * 90),    // 0-359deg
+  }), []);
+
+  const id = useId();
+
+  const safeId = id.replace(/:/g, '');
+
+  const Planet = planet as React.ElementType;
+
   return (
     <Ring
       size={size}
       bottom={atBottom}
       left={atLeft}
+      duration={duration}
+      startAngle={startAngle}
+      id={id}
     >
       {planet ? (
         <div>
-          <PlanetWrapper>
-            <Image src={planet} alt="planet" width={60} height={60} />
+          <PlanetWrapper $duration={duration} $startAngle={startAngle} $id={safeId}>
+            <Planet />
           </PlanetWrapper>
-          <PlanetWrapper>
-            <Image src={planet} alt="planet" width={60} height={60} />
+          <PlanetWrapper $duration={duration} $startAngle={startAngle} $id={safeId}>
+            <Planet />
           </PlanetWrapper>
         </div>
       ) : ''}
