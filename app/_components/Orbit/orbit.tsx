@@ -5,8 +5,6 @@ import styled from "styled-components"
 const SPIN_ROTATION = '10s';
 
 interface RingWrapperProps {
-  $bottom: boolean
-  $left: boolean
   width: number
   height: number
   $duration: number
@@ -18,25 +16,15 @@ const RingWrapper = styled.div<RingWrapperProps>`
   width: ${(props) => props.width ? props.width : '500'}px;
   height: ${(props) => props.height ? props.height : '500'}px;
   position: absolute;
-  ${(props) => props.$bottom ? 'bottom: 0' : 'top: 0'};
-  ${(props) => props.$left ? 'left: 0' : 'right: 0'};
+  top: 50%;
+  left: 50%;
 
   @keyframes ring-spin-${(props) => props.$id} {
     from  { 
-      transform:
-        translate(
-          ${(props) => props.$left ? '-50%' : '50%'}, 
-          ${(props) => props.$bottom ? '50%' : '-50%'}
-        )
-        rotate(${(props) => props.$startAngle}deg);
+      transform: translate(-50%, -50%) rotate(${(props) => props.$startAngle}deg);
     }
     to    {
-      transform:
-        translate(
-          ${(props) => props.$left ? '-50%' : '50%'}, 
-          ${(props) => props.$bottom ? '50%' : '-50%'}
-        )
-        rotate(${(props) => props.$startAngle + 360}deg);
+      transform: translate(-50%, -50%) rotate(${(props) => props.$startAngle + 360}deg);
     }
   }
 
@@ -46,15 +34,13 @@ const RingWrapper = styled.div<RingWrapperProps>`
 
 interface RingProps {
   size: number
-  bottom: boolean
-  left: boolean
   duration: number
   startAngle: number
   id: string
   children: React.ReactNode
 }
 
-const Ring = ({ size, bottom, left, duration, startAngle, id, children }: RingProps) => {
+const Ring = ({ size, duration, startAngle, id, children }: RingProps) => {
   const r = size / 2;
   const cx = r;
   const cy = r;
@@ -83,7 +69,7 @@ const Ring = ({ size, bottom, left, duration, startAngle, id, children }: RingPr
   const safeId = id.replace(/:/g, '');
 
   return (
-    <RingWrapper width={size} height={size} $bottom={bottom} $left={left} $duration={duration} $startAngle={startAngle} $id={safeId}>
+    <RingWrapper width={size} height={size} $duration={duration} $startAngle={startAngle} $id={safeId}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         {children ? (
           <defs>
@@ -158,24 +144,12 @@ const PlanetWrapper = styled.div<PlanetProps>`
   animation: counter-spin ${(props) => props.$duration}s linear infinite;
 `;
 
-type LocationVariant = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
-
 interface OrbitProps {
   size: number
-  location?: LocationVariant
   planet?: React.ElementType
 }
 
-export default function Orbit({ size, location, planet }: OrbitProps) {
-  let atBottom = false;
-  let atLeft = false;
-  if (location === 'bottomRight' || location === 'bottomLeft') {
-    atBottom = true;
-  }
-  if (location === 'topLeft' || location === 'bottomLeft') {
-    atLeft = true;
-  }
-
+export default function Orbit({ size, planet }: OrbitProps) {
   const { duration, startAngle } = useMemo(() => ({
     duration: 8 + Math.random() * 8,                // 8-16s
     startAngle: Math.floor(Math.random() * 90),    // 0-359deg
@@ -190,8 +164,6 @@ export default function Orbit({ size, location, planet }: OrbitProps) {
   return (
     <Ring
       size={size}
-      bottom={atBottom}
-      left={atLeft}
       duration={duration}
       startAngle={startAngle}
       id={id}

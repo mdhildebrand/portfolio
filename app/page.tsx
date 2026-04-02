@@ -41,27 +41,63 @@ const ContentWrapper = styled.div`
   justifcation: flex-start;
 `;
 
+type LocationVariant = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+
+interface OrbitWrapperProps {
+  location: LocationVariant
+}
+
+const BASE_SIZE = 1000;
+
+const OrbitWrapper = styled.div<OrbitWrapperProps>`
+  --scale: clamp(0, calc(180vw / ${BASE_SIZE}px), 1);
+
+  position: absolute;
+  width: ${BASE_SIZE}px;
+  height: ${BASE_SIZE}px;
+
+  ${(props) => props.location === 'topLeft' && `
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%) scale(var(--scale));
+  `}
+  ${(props) => props.location === 'topRight' && `
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%) scale(var(--scale));
+  `}
+  ${(props) => props.location === 'bottomLeft' && `
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%) scale(var(--scale));
+  `}
+  ${(props) => props.location === 'bottomRight' && `
+    bottom: 0;
+    right: 0;
+    transform: translate(50%, 50%) scale(var(--scale));
+  `}
+`;
+
 export default function Home() {
   return (
     <PageWrapper>
       <ContentWrapper>
         <H1>Matt<br/>Hildebrand</H1>
       </ContentWrapper>
-      <Orbit
-        size={300}
-        location="topRight"
-        planet={Planet3}
-      />
-      <Orbit
-        size={500}
-        location="topRight"
-        planet={Planet2}
-      />
-      <Orbit
-        size={650}
-        location="topRight"
-        planet={Planet1}
-      />
+      <OrbitWrapper location="topRight">
+        <Orbit
+          size={300}
+          planet={Planet3}
+        />
+        <Orbit
+          size={500}
+          planet={Planet2}
+        />
+        <Orbit
+          size={650}
+          planet={Planet1}
+        />
+      </OrbitWrapper>
     </PageWrapper>
   );
 }
