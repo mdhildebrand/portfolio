@@ -131,13 +131,6 @@ const PlanetWrapper = styled.div<PlanetProps>`
   >svg {
     max-height: 100%;
     max-width: 100%;
-    fill: white;
-    stroke: white;
-
-    path, circle, rect {
-      fill: white;
-      stroke: white;
-    }
   }
 
   animation: counter-spin ${(props) => props.$duration}s linear infinite;
