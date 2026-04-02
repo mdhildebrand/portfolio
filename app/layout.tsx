@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Moderustic } from "next/font/google";
 import "@/app/globals.css";
+import StyledComponentsRegistry from "./_components/StyledComponentsRegistry/StyledComponentsRegistry";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +34,11 @@ export default function RootLayout({
       lang="en"
       className={moderustic.className}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <StyledComponentsRegistry>
+          {children}
+        </StyledComponentsRegistry>
+      </body>
     </html>
   );
 }

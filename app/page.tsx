@@ -46,7 +46,7 @@ const ContentWrapper = styled.div`
 type LocationVariant = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 
 interface OrbitWrapperProps {
-  location: LocationVariant
+  $location: LocationVariant
 }
 
 const BASE_SIZE = 1000;
@@ -58,27 +58,30 @@ const OrbitWrapper = styled.div<OrbitWrapperProps>`
   width: ${BASE_SIZE}px;
   height: ${BASE_SIZE}px;
 
-  ${(props) => props.location === 'topLeft' && `
+  ${(props) => props.$location === 'topLeft' && `
     top: 0;
     left: 0;
     transform: translate(-50%, -50%) scale(var(--scale));
   `}
-  ${(props) => props.location === 'topRight' && `
+  ${(props) => props.$location === 'topRight' && `
     top: 0;
     right: 0;
     transform: translate(50%, -50%) scale(var(--scale));
   `}
-  ${(props) => props.location === 'bottomLeft' && `
+  ${(props) => props.$location === 'bottomLeft' && `
     bottom: 0;
     left: 0;
     transform: translate(-50%, 50%) scale(var(--scale));
   `}
-  ${(props) => props.location === 'bottomRight' && `
+  ${(props) => props.$location === 'bottomRight' && `
     bottom: 0;
     right: 0;
     transform: translate(50%, 50%) scale(var(--scale));
   `}
 `;
+
+console.log('Planet1 : ', Planet1);
+console.log('Planet1:', typeof Planet1, Planet1);
 
 export default function Home() {
   return (
@@ -86,7 +89,7 @@ export default function Home() {
       <ContentWrapper>
         <H1>Matt<br/>Hildebrand</H1>
       </ContentWrapper>
-      <OrbitWrapper location="topRight">
+      <OrbitWrapper $location="topRight">
         <Orbit
           size={300}
           planet={Planet3}
