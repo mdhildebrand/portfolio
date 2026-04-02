@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import styled from "styled-components"
 
 interface RingWrapperProps {
@@ -149,16 +149,24 @@ interface OrbitProps {
 }
 
 export default function Orbit({ size, planet }: OrbitProps) {
-  const [{ duration, startAngle }] = useState(() => ({
-    duration: 8 + Math.random() * 8,                // 8-16s
-    startAngle: Math.floor(Math.random() * 90),    // 0-359deg
-  }));
+  const [anim, setAnim] = useState<{ duration: number; startAngle: number } | null>(null);
+
+  useEffect(() => {
+    setAnim({
+      duration: 8 + Math.random() * 8,
+      startAngle: Math.floor(Math.random() * 90),
+    });
+  }, []);
 
   const id = useId();
 
   const safeId = id.replace(/:/g, '');
 
   const Planet = planet as React.ElementType;
+
+  if (!anim) return null;
+
+  const { duration, startAngle } = anim;
 
   return (
     <Ring
