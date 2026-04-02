@@ -11,10 +11,18 @@ const nextConfig: NextConfig = {
     },
   },
   webpack(config) {
+    config.module.rules = config.module.rules.map((rule: any) => {
+      if (rule.test?.toString().includes('svg')) {
+        return { ...rule, exclude: /\.svg$/ };
+      }
+      return rule;
+    });
+
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+
     return config;
   },
 };
