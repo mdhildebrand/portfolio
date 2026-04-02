@@ -26,6 +26,7 @@ const PageWrapper = styled.div`
 const H1 = styled.h1`
   margin: auto auto auto 0;
   font-size: clamp(24px, 15vw, 100px);
+  line-height: 1.15;
   z-index: 100;
   text-align: left;
 `;
