@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 import styled from "styled-components";
-import Orbit from "./_components/Orbit/orbit";
+import Orbit from "./_components/orbit";
 // import HTML5 from "@/assets/html5.svg";
-import Planet1 from "@/assets/planet1.svg";
-import Planet2 from "@/assets/planet2.svg";
-import Planet3 from "@/assets/planet3.svg";
+import { SvgPlanet1, SvgPlanet2, SvgPlanet3 } from "./_components/Planets";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -80,9 +78,6 @@ const OrbitWrapper = styled.div<OrbitWrapperProps>`
   `}
 `;
 
-console.log('Planet1 : ', Planet1);
-console.log('Planet1:', typeof Planet1, Planet1);
-
 export default function Home() {
   return (
     <PageWrapper>
@@ -92,15 +87,15 @@ export default function Home() {
       <OrbitWrapper $location="topRight">
         <Orbit
           size={300}
-          planet={Planet3}
+          planet={SvgPlanet3}
         />
         <Orbit
           size={500}
-          planet={Planet2}
+          planet={SvgPlanet2}
         />
         <Orbit
           size={650}
-          planet={Planet1}
+          planet={SvgPlanet1}
         />
       </OrbitWrapper>
     </PageWrapper>
