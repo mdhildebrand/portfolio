@@ -21,6 +21,15 @@ const PageWrapper = styled.div`
     100%{ background-position: 0% 200vw }
     // 100%{ background-position: 0% 0% }
   }
+
+  // background: linear-gradient(-20deg, rgba(0, 100, 90, 1), 15%, rgba(255, 0, 0, 0));
+  // animation: throb 4s ease-in-out infinite;
+
+  // @keyframes throb {
+  //   0%{ opacity: 0.8 }
+  //   50%{ opacity: 1 }
+  //   100%{ opacity: 0.8 }
+  // }
 `;
 
 const H1 = styled.h1`
@@ -49,31 +58,33 @@ interface OrbitWrapperProps {
 const BASE_SIZE = 1000;
 
 const OrbitWrapper = styled.div<OrbitWrapperProps>`
-  --scale: clamp(0, calc(180vw / ${BASE_SIZE}px), 1);
+  scale: clamp(0, calc(180vw / ${BASE_SIZE}px), 1);
 
   position: absolute;
   width: ${BASE_SIZE}px;
   height: ${BASE_SIZE}px;
 
+  scale: var(--orbit-scale);
+
   ${(props) => props.$location === 'topLeft' && `
     top: 0;
     left: 0;
-    transform: translate(-50%, -50%) scale(var(--scale));
+    transform: translate(-50%, -50%);
   `}
   ${(props) => props.$location === 'topRight' && `
     top: 0;
     right: 0;
-    transform: translate(50%, -50%) scale(var(--scale));
+    transform: translate(50%, -50%);
   `}
   ${(props) => props.$location === 'bottomLeft' && `
     bottom: 0;
     left: 0;
-    transform: translate(-50%, 50%) scale(var(--scale));
+    transform: translate(-50%, 50%);
   `}
   ${(props) => props.$location === 'bottomRight' && `
     bottom: 0;
     right: 0;
-    transform: translate(50%, 50%) scale(var(--scale));
+    transform: translate(50%, 50%);
   `}
 `;
 
@@ -83,7 +94,10 @@ export default function Home() {
       <ContentWrapper>
         <H1>Matt<br/>Hildebrand</H1>
       </ContentWrapper>
-      <OrbitWrapper $location="topRight">
+      <OrbitWrapper
+        $location="topRight"
+        style={{ '--orbit-scale': `clamp(0, calc(180vw / ${BASE_SIZE}px), 1)`} as React.CSSProperties}
+      >
         <Orbit
           size={300}
           planet={SvgPlanet3}
