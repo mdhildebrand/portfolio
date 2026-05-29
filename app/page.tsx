@@ -40,13 +40,27 @@ const H1 = styled.h1`
   text-align: left;
 `;
 
+const PageScroller = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: 10;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+`;
+
 const ContentWrapper = styled.div`
   padding: clamp(1rem, calc(5vw - 6px), 2rem);
   width: 100%;
+  height: 100vh;
   max-width: 1000px;
   margin: 0 auto;
   display: flex;
-  justifcation: flex-start;
+  justify-content: flex-start;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  transition: 0.5s ease;
 `;
 
 type LocationVariant = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
@@ -91,9 +105,17 @@ const OrbitWrapper = styled.div<OrbitWrapperProps>`
 export default function Home() {
   return (
     <PageWrapper>
-      <ContentWrapper>
-        <H1>Matt<br/>Hildebrand</H1>
-      </ContentWrapper>
+      <PageScroller>
+        <ContentWrapper>
+          <H1>Matt<br/>Hildebrand</H1>
+        </ContentWrapper>
+        <ContentWrapper>
+          <H1>Projects</H1>
+        </ContentWrapper>
+        <ContentWrapper>
+          <H1>Contact</H1>
+        </ContentWrapper>
+      </PageScroller>
       <OrbitWrapper
         $location="topRight"
         style={{ '--orbit-scale': `clamp(0, calc(180vw / ${BASE_SIZE}px), 1)`} as React.CSSProperties}
