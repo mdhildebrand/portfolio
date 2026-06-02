@@ -4,6 +4,9 @@ import styled from "styled-components";
 import Orbit from "./_components/orbit";
 import { SvgPlanet1, SvgPlanet2, SvgPlanet3 } from "./_components/Planets";
 import { useEffect, useRef } from "react";
+import Hero from "./_components/Hero";
+import Projects from "./_components/Projects";
+import Contact from "./_components/Contact";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -31,14 +34,6 @@ const PageWrapper = styled.div`
   //   50%{ opacity: 1 }
   //   100%{ opacity: 0.8 }
   // }
-`;
-
-const H1 = styled.h1`
-  margin: auto auto auto 0;
-  font-size: clamp(24px, 15vw, 100px);
-  line-height: 1.15;
-  z-index: 100;
-  text-align: left;
 `;
 
 const PageScroller = styled.div`
@@ -244,19 +239,19 @@ export default function Home() {
           key='home'
           ref={(el) => { if (el) sections.current[0] = el; }}
         >
-          <H1>Matt<br/>Hildebrand</H1>
+          <Hero />
         </ContentWrapper>
         <ContentWrapper
           key='projects'
           ref={(el) => { if (el) sections.current[1] = el; }}
         >
-          <H1>Projects</H1>
+          <Projects />
         </ContentWrapper>
         <ContentWrapper
           key='contact'
           ref={(el) => { if (el) sections.current[2] = el; }}
         >
-          <H1>Contact</H1>
+          <Contact />
         </ContentWrapper>
       </PageScroller>
       <OrbitWrapper
