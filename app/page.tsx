@@ -51,8 +51,45 @@ const PageScroller = styled.div`
   scroll-behavior: smooth;
 `;
 
+const ScrollTracker = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  padding: 25px;
+  height: clamp(200px, 50vh, 360px);
+
+  > div {
+    width: 20px;
+    height: 20px;
+    // margin: 25px 25px;
+    border-radius: 100%;
+    outline-offset: 10px;
+    background: #fff;
+    cursor: pointer;
+
+    &.active {
+      outline: 2px solid white;
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: calc(100% - 60px);
+    background: #fff;
+  }
+`;
+
 const ContentWrapper = styled.section`
-  padding: clamp(1rem, calc(5vw - 6px), 2rem);
+  padding: clamp(70px, calc(5vw - 6px), 2rem);
   width: 100%;
   height: 100vh;
   max-width: 1000px;
@@ -105,6 +142,7 @@ const OrbitWrapper = styled.div<OrbitWrapperProps>`
 
 export default function Home() {
   const sections = useRef<HTMLElement[]>([]);
+  const trackers = useRef<HTMLElement[]>([]);
   const isScrolling = useRef(false);
   const currentIndex = useRef(0);
 
@@ -123,6 +161,8 @@ export default function Home() {
 
       currentIndex.current = nextIndex;
       sections.current[nextIndex].scrollIntoView({ behavior: 'smooth' });
+      trackers.current.forEach((element => element.classList.remove('active')));
+      trackers.current[nextIndex].classList.add('active');
 
       setTimeout(() => {
         isScrolling.current = false;
@@ -151,6 +191,8 @@ export default function Home() {
 
           currentIndex.current = nextIndex;
           sections.current[nextIndex].scrollIntoView({ behavior: 'smooth' });
+          trackers.current.forEach((element => element.classList.remove('active')));
+          trackers.current[nextIndex].classList.add('active');
 
           setTimeout(() => {
             isScrolling.current = false;
@@ -158,6 +200,17 @@ export default function Home() {
         }
       };
     })();
+
+    trackers.current.forEach((element, i) => {
+      element.addEventListener('click', () => {
+        if( !element.classList.contains('active') ) {
+          trackers.current.forEach((element) => element.classList.remove('active'));
+          trackers.current[i].classList.add('active');
+          sections.current[i].scrollIntoView({ behavior: 'smooth' });
+          currentIndex.current = i;
+        }
+      })
+    });
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('touchstart', handleTouch.start);
@@ -172,6 +225,21 @@ export default function Home() {
   return (
     <PageWrapper>
       <PageScroller>
+        <ScrollTracker>
+          <div
+            key='home'
+            className="active"
+            ref={(el) => { if (el) trackers.current[0] = el; }}
+          ></div>
+          <div
+            key='projects'
+            ref={(el) => { if (el) trackers.current[1] = el; }}
+          ></div>
+          <div
+            key='contact'
+            ref={(el) => { if (el) trackers.current[2] = el; }}
+          ></div>
+        </ScrollTracker>
         <ContentWrapper
           key='home'
           ref={(el) => { if (el) sections.current[0] = el; }}
