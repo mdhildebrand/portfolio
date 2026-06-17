@@ -59,8 +59,11 @@ export default function Hero(){
       <h1>Matt Hildebrand</h1>
       <div className="p">Hi, welcome to my page! I'm a Web Developer, and I love <div id="wordSwap">
         <div className="active">building</div>
+        <div>trying</div>
         <div>making</div>
+        <div>discovering</div>
         <div>creating</div>
+        <div>learning</div>
       </div> things.</div>
     </HeroContainer>
   )
