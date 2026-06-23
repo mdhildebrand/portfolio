@@ -66,38 +66,39 @@ export default function Carousel() {
           slides.push(child);
         }
       })
-      console.log('slides : ', slides);
+      // console.log('slides : ', slides);
 
       let boundItems = () => {
         let outer = container?.getBoundingClientRect();
         let inner = innerContainer?.getBoundingClientRect();
 
-        if (parseInt(innerContainer?.style.left) > 0) {
-          innerContainer.style.left = "0px";
+        if (parseInt(innerContainer?.style.left) > 100) {
+          innerContainer.style.left = "100px";
         }
 
-        if (inner.right < outer.right) {
-          innerContainer.style.left = `-${inner.width - outer.width}px`;
+        if (inner.right + 300 < outer.right) {
+          innerContainer.style.left = `-${inner.width - outer.width + 300}px`;
         }
       };
 
       let updateIndex = () => {
         let nextIndex = currentIndex.current;
-        console.log('xRelease : ', xRelease);
-        console.log('xGrab : ', xGrab);
+        // console.log('xRelease : ', xRelease);
+        // console.log('xGrab : ', xGrab);
         if (xRelease < xGrab && xMovement < 0) {
           if (nextIndex < slides.length - 1) {
             nextIndex++;
           } else {
-            nextIndex = 0;
+            // nextIndex = 0;
+
           }
         } else if (nextIndex > 0 && xMovement > 0) {
           nextIndex--;
         }
-        console.log('nextIndex : ', nextIndex);
+        // console.log('nextIndex : ', nextIndex);
         currentIndex.current = nextIndex;
         const newLeft = (slides[currentIndex.current].offsetWidth + 20) * currentIndex.current;
-        console.log('newLeft : ', newLeft);
+        // console.log('newLeft : ', newLeft);
         innerContainer.classList.remove('grabbed');
         innerContainer.style.left = `-${newLeft}px`;
       }
