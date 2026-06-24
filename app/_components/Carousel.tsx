@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+import projects from "../../assets/projects/projects.json";
 
 const CarouselContainer = styled.div`
   display: flex;
@@ -36,9 +37,25 @@ const ProjectWrapper = styled.div`
   border: 2px solid white;
 `;
 
-const Project = () => {
+interface ProjectData {
+  slug: string;
+  image: string;
+  title: string;
+  description: string;
+}
+
+interface ProjectProps {
+  data: ProjectData;
+
+}
+
+const Project: React.FC<ProjectProps> = ({ data } : ProjectProps ) => {
+  console.log('data : ', data);
   return (
-    <ProjectWrapper></ProjectWrapper>
+    <ProjectWrapper>
+      <h2>{data.title}</h2>
+      <p>{data.description}</p>
+    </ProjectWrapper>
   )
 }
 
@@ -139,11 +156,15 @@ export default function Carousel() {
   return (
     <CarouselContainer ref={containerRef}>
       <CarouselInnerContainer ref={innerContainerRef}>
-        <Project />
-        <Project />
-        <Project />
-        <Project />
-        <Project />
+        {projects.projects instanceof Array && projects.projects.map((project) => (
+          <Project
+            // slug={project.slug}
+            // image={project.image}
+            // title={project.title}
+            // description={project.description}
+            data={project}
+          />
+        ))}
       </CarouselInnerContainer>
     </CarouselContainer>
   )

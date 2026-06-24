@@ -1,0 +1,34 @@
+{
+  "projects": [
+    {
+      "slug": "project-name",
+      "image": "project.jpg",
+      "title": "Project Name",
+      "description": "A description of the project"
+    },
+    {
+      "slug": "project-name",
+      "image": "project.jpg",
+      "title": "Project Name",
+      "description": "A description of the project"
+    },
+    {
+      "slug": "project-name",
+      "image": "project.jpg",
+      "title": "Project Name",
+      "description": "A description of the project"
+    },
+    {
+      "slug": "project-name",
+      "image": "project.jpg",
+      "title": "Project Name",
+      "description": "A description of the project"
+    },
+    {
+      "slug": "project-name",
+      "image": "project.jpg",
+      "title": "Project Name",
+      "description": "A description of the project"
+    }
+  ]
+}
