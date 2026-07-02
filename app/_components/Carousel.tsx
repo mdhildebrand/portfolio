@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
+import Image from "next/image";
 import styled from "styled-components";
-import projects from "../../assets/projects/projects.json";
+import projects from "../../public/projects/projects.json";
 
 const CarouselContainer = styled.div`
   display: flex;
@@ -30,11 +31,36 @@ const CarouselInnerContainer = styled.div`
 
 const ProjectWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   height: 100%;
+  gap: 2rem;
   width: round(down, calc(60vw - 150px), 1px);
-  border-radius: 24px;
-  border: 2px solid white;
+  // border-radius: 24px;
+  // border: 2px solid white;
+  padding: 1rem;
+`;
+
+const ProjectImage = styled.div`
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const ProjectText = styled.div`
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+  }
 `;
 
 interface ProjectData {
@@ -53,8 +79,18 @@ const Project: React.FC<ProjectProps> = ({ data } : ProjectProps ) => {
   console.log('data : ', data);
   return (
     <ProjectWrapper>
-      <h2>{data.title}</h2>
-      <p>{data.description}</p>
+      <ProjectImage>
+        <Image
+          src={`/projects/${data.image}`}
+          alt={`Screenshot of project ${data.title}`}
+          width={500}
+          height={1000}
+        />
+      </ProjectImage>
+      <ProjectText>
+        <h2>{data.title}</h2>
+        <p>{data.description}</p>
+      </ProjectText>
     </ProjectWrapper>
   )
 }
@@ -156,8 +192,9 @@ export default function Carousel() {
   return (
     <CarouselContainer ref={containerRef}>
       <CarouselInnerContainer ref={innerContainerRef}>
-        {projects.projects instanceof Array && projects.projects.map((project) => (
+        {projects.projects instanceof Array && projects.projects.map((project, i) => (
           <Project
+            key={i}
             // slug={project.slug}
             // image={project.image}
             // title={project.title}
