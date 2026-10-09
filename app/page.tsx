@@ -11,14 +11,14 @@ import Contact from "./_components/Contact";
 const PageWrapper = styled.div`
   display: flex;
   position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  // width: 100vw;
+  // height: 100vh;
+  // overflow: hidden;
 
   // background: linear-gradient(45deg, #4466ff, #ee88cc);
-  background: linear-gradient(45deg, #000070, #00aacc, #000070, #00aacc, #000070);
+  background: linear-gradient(45deg, #000070, #8866bb, #000070, #8866bb, #000070);
   background-size: 200vw 200vw;
-  animation: run 20s linear infinite;
+  animation: run 30s linear infinite;
 
   @keyframes run {
     0%{ background-position: 0% 0% }
@@ -34,6 +34,24 @@ const PageWrapper = styled.div`
   //   50%{ opacity: 1 }
   //   100%{ opacity: 0.8 }
   // }
+
+  //////////////////////////////////
+  // Updates for function changes //
+  //////////////////////////////////
+
+  flex-direction: column;
+
+  > div {
+    width: 90%;
+    max-width: 920px;
+    margin: auto; 
+
+    > div {
+      padding: 0 1rem; 
+    }
+  }
+
+  //////////////////////////////////
 `;
 
 const PageScroller = styled.div`
@@ -136,90 +154,90 @@ const OrbitWrapper = styled.div<OrbitWrapperProps>`
 `;
 
 export default function Home() {
-  const sections = useRef<HTMLElement[]>([]);
-  const trackers = useRef<HTMLElement[]>([]);
-  const isScrolling = useRef(false);
-  const currentIndex = useRef(0);
+  // const sections = useRef<HTMLElement[]>([]);
+  // const trackers = useRef<HTMLElement[]>([]);
+  // const isScrolling = useRef(false);
+  // const currentIndex = useRef(0);
 
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
+  // useEffect(() => {
+  //   const handleWheel = (e: WheelEvent) => {
+  //     e.preventDefault();
 
-      if (isScrolling.current) return;
-      isScrolling.current = true;
+  //     if (isScrolling.current) return;
+  //     isScrolling.current = true;
 
-      const direction = e.deltaY > 0 ? 1 : -1;
-      const nextIndex = Math.min(
-        Math.max(currentIndex.current + direction, 0),
-        sections.current.length - 1
-      );
+  //     const direction = e.deltaY > 0 ? 1 : -1;
+  //     const nextIndex = Math.min(
+  //       Math.max(currentIndex.current + direction, 0),
+  //       sections.current.length - 1
+  //     );
 
-      currentIndex.current = nextIndex;
-      sections.current[nextIndex].scrollIntoView({ behavior: 'smooth' });
-      trackers.current.forEach((element => element.classList.remove('active')));
-      trackers.current[nextIndex].classList.add('active');
+  //     currentIndex.current = nextIndex;
+  //     sections.current[nextIndex].scrollIntoView({ behavior: 'smooth' });
+  //     trackers.current.forEach((element => element.classList.remove('active')));
+  //     trackers.current[nextIndex].classList.add('active');
 
-      setTimeout(() => {
-        isScrolling.current = false;
-      }, 800);
-    };
+  //     setTimeout(() => {
+  //       isScrolling.current = false;
+  //     }, 800);
+  //   };
 
-    const handleTouch = (() => {
-      let touchStartY = 0;
+  //   const handleTouch = (() => {
+  //     let touchStartY = 0;
 
-      return {
-        start: (e: TouchEvent) => {
-          touchStartY = e.touches[0].clientY;
-        },
-        end: (e: TouchEvent) => {
-          if (isScrolling.current) return;
+  //     return {
+  //       start: (e: TouchEvent) => {
+  //         touchStartY = e.touches[0].clientY;
+  //       },
+  //       end: (e: TouchEvent) => {
+  //         if (isScrolling.current) return;
 
-          const diff = touchStartY - e.changedTouches[0].clientY;
-          if (Math.abs(diff) < 50) return;
+  //         const diff = touchStartY - e.changedTouches[0].clientY;
+  //         if (Math.abs(diff) < 50) return;
 
-          isScrolling.current = true;
-          const direction = diff > 0 ? 1 : -1;
-          const nextIndex = Math.min(
-            Math.max(currentIndex.current + direction, 0),
-            sections.current.length -1
-          );
+  //         isScrolling.current = true;
+  //         const direction = diff > 0 ? 1 : -1;
+  //         const nextIndex = Math.min(
+  //           Math.max(currentIndex.current + direction, 0),
+  //           sections.current.length -1
+  //         );
 
-          currentIndex.current = nextIndex;
-          sections.current[nextIndex].scrollIntoView({ behavior: 'smooth' });
-          trackers.current.forEach((element => element.classList.remove('active')));
-          trackers.current[nextIndex].classList.add('active');
+  //         currentIndex.current = nextIndex;
+  //         sections.current[nextIndex].scrollIntoView({ behavior: 'smooth' });
+  //         trackers.current.forEach((element => element.classList.remove('active')));
+  //         trackers.current[nextIndex].classList.add('active');
 
-          setTimeout(() => {
-            isScrolling.current = false;
-          }, 800);
-        }
-      };
-    })();
+  //         setTimeout(() => {
+  //           isScrolling.current = false;
+  //         }, 800);
+  //       }
+  //     };
+  //   })();
 
-    trackers.current.forEach((element, i) => {
-      element.addEventListener('click', () => {
-        if( !element.classList.contains('active') ) {
-          trackers.current.forEach((element) => element.classList.remove('active'));
-          trackers.current[i].classList.add('active');
-          sections.current[i].scrollIntoView({ behavior: 'smooth' });
-          currentIndex.current = i;
-        }
-      })
-    });
+  //   trackers.current.forEach((element, i) => {
+  //     element.addEventListener('click', () => {
+  //       if( !element.classList.contains('active') ) {
+  //         trackers.current.forEach((element) => element.classList.remove('active'));
+  //         trackers.current[i].classList.add('active');
+  //         sections.current[i].scrollIntoView({ behavior: 'smooth' });
+  //         currentIndex.current = i;
+  //       }
+  //     })
+  //   });
 
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouch.start);
-    window.addEventListener('touchend', handleTouch.end);
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouch.start);
-      window.removeEventListener('touchend', handleTouch.end);
-    };
-  }, []);
+  //   window.addEventListener('wheel', handleWheel, { passive: false });
+  //   window.addEventListener('touchstart', handleTouch.start);
+  //   window.addEventListener('touchend', handleTouch.end);
+  //   return () => {
+  //     window.removeEventListener('wheel', handleWheel);
+  //     window.removeEventListener('touchstart', handleTouch.start);
+  //     window.removeEventListener('touchend', handleTouch.end);
+  //   };
+  // }, []);
 
   return (
     <PageWrapper>
-      <PageScroller>
+      {/* <PageScroller>
         <ScrollTracker>
           <div
             key='home'
@@ -270,7 +288,12 @@ export default function Home() {
           size={650}
           planet={SvgPlanet1}
         />
-      </OrbitWrapper>
+      </OrbitWrapper> */}
+      <div>
+        <Hero />
+        <Projects />
+        <Contact />
+      </div>
     </PageWrapper>
   );
 }

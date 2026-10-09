@@ -1,17 +1,17 @@
-import { useEffect } from "react";
 import styled from "styled-components"
 
 const HeroContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: calc(90vw - 100px);
-  margin-right: auto;
+  height: 100vh;
+  margin: auto;
   
   > .p {
-    max-width: 75%;
-    font-size: clamp(1rem, 5vw, 1.75rem);
-    line-height: 1.2;
+    max-width: 90%;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    line-height: 1.5;
+    margin-top: 3rem;
 
     > div {
       display: inline-flex;
@@ -31,40 +31,11 @@ const HeroContainer = styled.div`
 `;
 
 export default function Hero(){
-  useEffect(() => {
-    const words = document.querySelectorAll("#wordSwap > div");
-    let activeWord = 0;
-
-    const rotateWords = (() => {
-      if (words) {
-        if (activeWord < words.length - 1) {
-          activeWord++;
-        } else {
-          activeWord = 0;
-        }
-        words?.forEach((word) => {
-          word.classList.remove('active');
-        })
-        words[activeWord].classList.add('active');
-      }
-    })
-
-    const intervalInit = window.setInterval(rotateWords, 1000);
-
-    return () => clearInterval(intervalInit);
-  }, [])
-
   return (
     <HeroContainer>
       <h1>Matt Hildebrand</h1>
-      <div className="p">Hi, welcome to my page! I'm a Web Developer, and I love <div id="wordSwap">
-        <div className="active">building</div>
-        <div>trying</div>
-        <div>making</div>
-        <div>discovering</div>
-        <div>creating</div>
-        <div>learning</div>
-      </div> things.</div>
+      <h2>Web developer based in Vancouver, BC</h2>
+      <div className="p">I'm a web developer who's spent over five years building custom WordPress and React sites for clients, with experience ranging across education, real estate, health, and retail. I specialize in collaborating closely with designers to turn high-fidelity Figma designs into fast, accessible, polished websites, with a focus on clean code and attention to detail.</div>
     </HeroContainer>
   )
 }

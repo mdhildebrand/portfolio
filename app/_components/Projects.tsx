@@ -1,13 +1,10 @@
-import { useEffect } from "react";
 import styled from "styled-components";
-import Carousel from "./Carousel";
+import Riverflow from "./Riverflow";
 
 const ProjectsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  max-width: calc(90vw - 100px);
-  margin-right: auto;
+  margin: auto;
   
   > .p {
     max-width: 75%;
@@ -19,9 +16,8 @@ const ProjectsContainer = styled.div`
 export default function Projects(){
   return (
     <ProjectsContainer>
-      <h1>Projects</h1>
-      <p>Take a look at some of the projects I've worked on!</p>
-      <Carousel />
+      <h2>Selected work</h2>
+      <Riverflow />
     </ProjectsContainer>
   )
 }
