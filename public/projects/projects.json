@@ -1,0 +1,25 @@
+{
+  "projects": [
+    {
+      "slug": "yorkville",
+      "title": "Yorkville University",
+      "description": "A WordPress site built with Sage/Laravel and Tailwind, designed to introduce prospective students to the University, and showcase its programs of study.",
+      "modalDescription": "This WordPress site was built with a large library of custom blocks and components - about sixty altogether - and using Tailwind and a selection of plugins where they added value. The biggest challenge was displaying a huge amount of program information in a way that was easy to explore and digest. This was particularly true when it came to the program overview page, for which I built a set of filters utilizing custom post taxonomies, and custom program tiles that could expand on demand and rearrange themselves to make room.",
+      "url": "https://www.yorkvilleu.ca/"
+    },
+    {
+      "slug": "arcteryx-obsessive-design",
+      "title": "Arc'teryx - Obsessive Design",
+      "description": "A dynamic React site that walks users through the design details and product showcases behind Arc'teryx gear.",
+      "modalDescription": "The goal was to build a dynamic, visually engaging site showcasing the design details that go into the construction of Arc'teryx's products. Using React and a variety of custom components, I built scroll-driven effects, image collages, carousels, and parallax effects to keep users engaged while showing off high-quality imagery. The result was a high-performance site delivered on a tight deadline, and a client that came back to us for further work.",
+      "url": "https://arcteryx.com/ca/en/explore/obsessive-design"
+    },
+    {
+      "slug": "london-pacific",
+      "title": "London Pacific",
+      "description": "A custom WordPress site built around the Estatik real estate plugin, featuring a searchable database of listings.",
+      "modalDescription": "The main challenge with this project was reconciling the client's preferred design with a plugin that provided the functionality the site needed. I spent time digging into the Estatik plugin, and wrote custom PHP, CSS, and JavaScript to reshape it's native output to match the design. The result is a stylish, effective site that balances form and function.",
+      "url": "https://londonpacific.ca/"
+    }
+  ]
+}
