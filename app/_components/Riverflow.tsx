@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import projects from "../../public/projects/projects.json";
@@ -267,6 +267,20 @@ const Project: React.FC<ProjectProps> = ({ data } : ProjectProps ) => {
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
+  useEffect(() => {
+    const handleKeyDown = (e: { key: string; }) => {
+      if (e.key === 'Escape') {
+        setModalOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    }
+  }, []);
+
   console.log('data : ', data);
   return (
     <ProjectWrapper>
@@ -294,7 +308,12 @@ const Project: React.FC<ProjectProps> = ({ data } : ProjectProps ) => {
         <br/>
         <button onClick={openModal} aria-label={`See more about ${data.title}`}>See more<div>›</div></button>
       </ProjectText>
-      <ModalBackground onClick={closeModal} display={modalOpen ? "block" : "none"}>
+      <ModalBackground
+        onClick={closeModal}
+        display={modalOpen ? "block" : "none"}
+        role="dialog"
+        aria-modal="true"
+      >
         <ModalWrapper onClick={(e) => e.stopPropagation()}>
           <ModalText>
             <h3>{data.title}</h3>
@@ -320,7 +339,7 @@ const Project: React.FC<ProjectProps> = ({ data } : ProjectProps ) => {
               />
             </ModalMobileImage>
           </ModalImage>
-          <ModalCloseButton onClick={closeModal}>
+          <ModalCloseButton onClick={closeModal} aria-label="close modal">
             <span></span>
             <span></span>
           </ModalCloseButton>

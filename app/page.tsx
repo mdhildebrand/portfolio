@@ -18,22 +18,16 @@ const PageWrapper = styled.div`
   // background: linear-gradient(45deg, #4466ff, #ee88cc);
   background: linear-gradient(45deg, #000070, #8866bb, #000070, #8866bb, #000070);
   background-size: 200vw 200vw;
-  animation: run 30s linear infinite;
 
-  @keyframes run {
-    0%{ background-position: 0% 0% }
-    100%{ background-position: 0% 200vw }
-    // 100%{ background-position: 0% 0% }
+  @media (prefers-reduced-motion) {
+    animation: run 30s linear infinite;
+
+    @keyframes run {
+      0%{ background-position: 0% 0% }
+      100%{ background-position: 0% 200vw }
+      // 100%{ background-position: 0% 0% }
+    }
   }
-
-  // background: linear-gradient(-20deg, rgba(0, 100, 90, 1), 15%, rgba(255, 0, 0, 0));
-  // animation: throb 4s ease-in-out infinite;
-
-  // @keyframes throb {
-  //   0%{ opacity: 0.8 }
-  //   50%{ opacity: 1 }
-  //   100%{ opacity: 0.8 }
-  // }
 
   //////////////////////////////////
   // Updates for function changes //
