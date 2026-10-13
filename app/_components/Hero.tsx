@@ -54,11 +54,13 @@ const DownArrow = styled.div`
     position: absolute;
 
     &:first-child {
-      transform: translateX(-33%) rotate(45deg);
+    left: 0;
+      transform: translateX(17%) rotate(45deg);
     }
 
     &:nth-child(2) {
-      transform: translateX(33%) rotate(-45deg);
+    right: 0;
+      transform: translateX(-17%) rotate(-45deg);
     }
   }
 `;
