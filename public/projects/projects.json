@@ -13,16 +13,16 @@
       "slug": "arcteryx-obsessive-design",
       "title": "Arc'teryx - Obsessive Design",
       "description": "A dynamic React site that walks users through the design details and product showcases behind Arc'teryx gear.",
-      "modalDescription": "The goal was to build a dynamic, visually engaging site showcasing the design details that go into the construction of Arc'teryx's products. Using React and a variety of custom components, I built scroll-driven effects, image collages, carousels, and parallax effects to keep users engaged while showing off high-quality imagery. The result was a high-performance site delivered on a tight deadline, and a client that came back to us for further work.",
+      "modalDescription": "The goal was to build a dynamic, visually engaging site showcasing the design details that go into the construction of Arc'teryx's products. Using React and a variety of custom components, I built scroll-driven effects, image collages, carousels, and parallax effects to keep users engaged while showing off high-quality imagery. The result was a site delivered on a tight deadline, and a client that came back to us for further work.",
       "modalImageAltText": "Obsessive Design Hadron feature page",
-      "techstack": "React • styled-components • JavaScript • parallax/scroll • effects",
+      "techstack": "React • styled-components • JavaScript • parallax/scroll effects",
       "url": "https://arcteryx.com/ca/en/explore/obsessive-design"
     },
     {
       "slug": "london-pacific",
       "title": "London Pacific",
       "description": "A custom WordPress site built around the Estatik real estate plugin, featuring a searchable database of listings.",
-      "modalDescription": "The main challenge with this project was reconciling the client's preferred design with a plugin that provided the functionality the site needed. I spent time digging into the Estatik plugin, and wrote custom PHP, CSS, and JavaScript to reshape it's native output to match the design. The result is a stylish, effective site that balances form and function.",
+      "modalDescription": "The main challenge with this project was reconciling the client's preferred design with a plugin that provided the functionality the site needed. I spent time digging into the Estatik plugin, and wrote custom PHP, CSS, and JavaScript to reshape its native output to match the design. The result is a stylish, effective site that balances form and function.",
       "modalImageAltText": "London Pacific listing search page",
       "techstack": "WordPress • Sage/Laravel • Estatik • PHP • JavaScript • SCSS/Tailwind",
       "url": "https://londonpacific.ca/"

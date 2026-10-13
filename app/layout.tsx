@@ -21,10 +21,10 @@ const moderustic = Moderustic({
 
 export const metadata: Metadata = {
   title: "Matt Hildebrand | Web Developer in Vancouver, BC",
-  description: "Matt Hildebrand is a Vancouver-based web developer building custom WordPress and react sites.",
+  description: "Matt Hildebrand is a Vancouver-based web developer building custom WordPress and React sites.",
   openGraph: {
     title: "Matt Hildebrand | Web Developer in Vancouver, BC",
-    description: "Matt Hildebrand is a Vancouver-based web developer building custom WordPress and react sites.",
+    description: "Matt Hildebrand is a Vancouver-based web developer building custom WordPress and React sites.",
     url: 'https://mdhildebrand.com',
   }
 };
