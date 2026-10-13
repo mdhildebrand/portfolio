@@ -73,6 +73,7 @@ const ProjectText = styled.div`
     cursor: pointer;
     text-align: left;
     display: flex;
+    margin-top: 2rem;
 
     >div {
       margin-left: 1rem;
@@ -305,7 +306,6 @@ const Project: React.FC<ProjectProps> = ({ data } : ProjectProps ) => {
       <ProjectText>
         <h3>{data.title}</h3>
         <p>{data.description}</p>
-        <br/>
         <button onClick={openModal} aria-label={`See more about ${data.title}`}>See more<div>›</div></button>
       </ProjectText>
       <ModalBackground
