@@ -93,7 +93,11 @@ const ProjectText = styled.div`
   }
 `;
 
-const ModalBackground = styled.div`
+interface Props {
+  display: string;
+}
+
+const ModalBackground = styled.div<Props>`
   z-index: 100;
   width: 100vw;
   height: 100vh;
@@ -103,6 +107,7 @@ const ModalBackground = styled.div`
   background: rgba(0,0,0,0.25);
   overflow-y: auto;
   overscroll-behavior: contain;
+  display: ${(p) => p.display};
 `;
 
 const ModalWrapper = styled.div`
@@ -136,9 +141,15 @@ const ModalText = styled.div`
   overflow-y: auto;
 
   >h3 {
-    margin-bottom: 2rem;
     font-size: 1rem;
     font-weight: 600;
+  }
+
+  >h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: -0.8px;
+    margin-bottom: 2rem;
   }
 
   >p {
@@ -241,6 +252,8 @@ interface ProjectData {
   title: string;
   description: string;
   modalDescription: string;
+  modalImageAltText: string;
+  techstack: string;
   url: string;
 }
 
@@ -261,7 +274,7 @@ const Project: React.FC<ProjectProps> = ({ data } : ProjectProps ) => {
         <DesktopImage>
           <Image
             src={`/projects/${data.slug}/desktop/homepage_hero.png`}
-            alt={`Screenshot of project ${data.title}`}
+            alt={`${data.title} homepage on desktop`}
             width={1000}
             height={800}
           />
@@ -269,7 +282,7 @@ const Project: React.FC<ProjectProps> = ({ data } : ProjectProps ) => {
         <MobileImage>
           <Image
             src={`/projects/${data.slug}/mobile/homepage_hero.png`}
-            alt={`Screenshot of project ${data.title}`}
+            alt={`${data.title} homepage on mobile`}
             width={500}
             height={1000}
           />
@@ -279,41 +292,40 @@ const Project: React.FC<ProjectProps> = ({ data } : ProjectProps ) => {
         <h3>{data.title}</h3>
         <p>{data.description}</p>
         <br/>
-        <button onClick={openModal}>See more<div>›</div></button>
+        <button onClick={openModal} aria-label={`See more about ${data.title}`}>See more<div>›</div></button>
       </ProjectText>
-      {modalOpen && (
-        <ModalBackground onClick={closeModal}>
-          <ModalWrapper onClick={(e) => e.stopPropagation()}>
-            <ModalText>
-              <h3>{data.title}</h3>
-              <p>{data.modalDescription}</p>
-              <p><a href={data.url} target="_blank">Visit site<div>›</div></a></p>
-            </ModalText>
-            <ModalImage>
-              <ModalDesktopImage>
-                <Image
-                  src={`/projects/${data.slug}/desktop/modal_image.png`}
-                  alt={`Screenshot of project ${data.title}`}
-                  width={1000}
-                  height={800}
-                />
-              </ModalDesktopImage>
-              <ModalMobileImage>
-                <Image
-                  src={`/projects/${data.slug}/mobile/modal_image.png`}
-                  alt={`Screenshot of project ${data.title}`}
-                  width={500}
-                  height={1000}
-                />
-              </ModalMobileImage>
-            </ModalImage>
-            <ModalCloseButton onClick={closeModal}>
-              <span></span>
-              <span></span>
-            </ModalCloseButton>
-          </ModalWrapper>
-        </ModalBackground>
-      )}
+      <ModalBackground onClick={closeModal} display={modalOpen ? "block" : "none"}>
+        <ModalWrapper onClick={(e) => e.stopPropagation()}>
+          <ModalText>
+            <h3>{data.title}</h3>
+            <h4>{data.techstack}</h4>
+            <p>{data.modalDescription}</p>
+            <div><a href={data.url} target="_blank">Visit site<div>›</div></a></div>
+          </ModalText>
+          <ModalImage>
+            <ModalDesktopImage>
+              <Image
+                src={`/projects/${data.slug}/desktop/modal_image.png`}
+                alt={`${data.modalImageAltText} on desktop`}
+                width={1000}
+                height={800}
+              />
+            </ModalDesktopImage>
+            <ModalMobileImage>
+              <Image
+                src={`/projects/${data.slug}/mobile/modal_image.png`}
+                alt={`${data.modalImageAltText} on mobile`}
+                width={500}
+                height={1000}
+              />
+            </ModalMobileImage>
+          </ModalImage>
+          <ModalCloseButton onClick={closeModal}>
+            <span></span>
+            <span></span>
+          </ModalCloseButton>
+        </ModalWrapper>
+      </ModalBackground>
     </ProjectWrapper>
   )
 }

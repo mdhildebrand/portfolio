@@ -35,7 +35,7 @@ export default function Hero(){
     <HeroContainer>
       <h1>Matt Hildebrand</h1>
       <h2>Web developer based in Vancouver, BC</h2>
-      <div className="p">I'm a web developer who's spent over five years building custom WordPress and React sites for clients, with experience ranging across education, real estate, health, and retail. I specialize in collaborating closely with designers to turn high-fidelity Figma designs into fast, accessible, polished websites, with a focus on clean code and attention to detail.</div>
+      <div className="p">I'm a web developer who's spent over five years building custom WordPress and React sites for clients, with experience ranging across education, real estate, and retail. I specialize in collaborating closely with designers to turn high-fidelity Figma designs into high performance, accessible, polished websites, with a focus on clean code and attention to detail.</div>
     </HeroContainer>
   )
 }
