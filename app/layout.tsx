@@ -20,8 +20,13 @@ const moderustic = Moderustic({
 })
 
 export const metadata: Metadata = {
-  title: "mdhildebrand",
-  description: "Portfolio site coming soon",
+  title: "Matt Hildebrand | Web Developer in Vancouver, BC",
+  description: "Matt Hildebrand is a Vancouver-based web developer building custom WordPress and react sites.",
+  openGraph: {
+    title: "Matt Hildebrand | Web Developer in Vancouver, BC",
+    description: "Matt Hildebrand is a Vancouver-based web developer building custom WordPress and react sites.",
+    url: 'https://mdhildebrand.com',
+  }
 };
 
 export default function RootLayout({
